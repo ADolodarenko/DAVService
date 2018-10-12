@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact name="DAVService:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/DAVService_jar</output-path>
+    <root id="root">
+      <element id="archive" name="dav-service-1.0.jar">
+        <element id="module-output" name="DAVService" />
+      </element>
+      <element id="library" level="project" name="javax.mail" />
+    </root>
+  </artifact>
+</component>
