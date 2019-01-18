@@ -1,12 +1,17 @@
 package org.dav.service.view;
 
+/**
+ * A list of strings for exceptions, keys and messages.
+ */
 public class Constants
 {
 	//Exceptions of any kind
 	public static final String EXCPT_RESOURCE_MANAGER_EMPTY = "Resource manager is empty.";
+	public static final String EXCPT_RESOURCE_BUNDLE_EMPTY = "The resource bundle is empty.";
 	public static final String EXCPT_TABLE_EDITOR_FACTORY_EMPTY = "Table cell editor factory is empty.";
 	public static final String EXCPT_TABLE_RENDERER_FACTORY_EMPTY = "Table cell renderer factory is empty.";
 	public static final String EXCPT_VALUE_TYPE_WRONG = "Wrong value type.";
+	public static final String EXCPT_TITLE_KEY_EMPTY = "The title key is empty.";
 
 	//Exceptions for Parameter class
 	public static final String EXCPT_PARAM_KEY_EMPTY = "Parameter key is empty.";
@@ -59,6 +64,12 @@ public class Constants
 	public static final String CLASS_NAME_PASSWORD = "Password";
 	public static final String CLASS_NAME_LOCALDATETIME = "LocalDateTime";
 	public static final String CLASS_NAME_SQLWARNING = "SQLWarning";
+	public static final String CLASS_NAME_JLABEL = "JLabel";
+	public static final String CLASS_NAME_JBUTTON = "JButton";
+	public static final String CLASS_NAME_JCHECKBOX = "JCheckBox";
+	public static final String CLASS_NAME_JMENUITEM = "JMenuItem";
+	public static final String CLASS_NAME_JPANEL = "JPanel";
+	public static final String CLASS_NAME_TITLEDBORDER = "TitledBorder";
 
 	//Messages
 	public static final String MESS_ROWS_AFFECTED = "(%d row(s) affected)";

@@ -7,6 +7,9 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class is meant to adjust components with titles.
+ */
 public class TitleAdjuster
 {
 	private Map<Component, Title> titledComponents;
@@ -24,15 +27,15 @@ public class TitleAdjuster
 		String className = component.getClass().getSimpleName();
 		String text = title.getText();
 		
-		if ("JLabel".equals(className))
+		if (Constants.CLASS_NAME_JLABEL.equals(className))
 			((JLabel) component).setText(text);
-		else if ("JButton".equals(className))
+		else if (Constants.CLASS_NAME_JBUTTON.equals(className))
 			((JButton) component).setText(text);
-		else if ("JCheckBox".equals(className))
+		else if (Constants.CLASS_NAME_JCHECKBOX.equals(className))
 			((JCheckBox) component).setText(text);
-		else if ("JMenuItem".equals(className))
+		else if (Constants.CLASS_NAME_JMENUITEM.equals(className))
 			((JMenuItem) component).setText(text);
-		else if ("JPanel".equals(className))
+		else if (Constants.CLASS_NAME_JPANEL.equals(className))
 		{
 			Border border = ((JPanel) component).getBorder();
 			
@@ -40,7 +43,7 @@ public class TitleAdjuster
 			{
 				String borderClassName = border.getClass().getSimpleName();
 				
-				if ("TitledBorder".equals(borderClassName))
+				if (Constants.CLASS_NAME_TITLEDBORDER.equals(borderClassName))
 				{
 					((TitledBorder) border).setTitle(text);
 					

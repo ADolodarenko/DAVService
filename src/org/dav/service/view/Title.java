@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+/**
+ * A title for a visual component. Returns a string for the component to display using a key string and a resource bundle.
+ */
 public class Title
 {
 	private ResourceManager manager;
@@ -16,10 +19,10 @@ public class Title
 	public static String getTitleString(ResourceBundle bundle, String titleKey)
 	{
 		if (bundle == null)
-			throw new IllegalArgumentException("The resource bundle is null.");
+			throw new IllegalArgumentException(Constants.EXCPT_RESOURCE_BUNDLE_EMPTY);
 
 		if (titleKey == null)
-			throw new IllegalArgumentException("The title key is null.");
+			throw new IllegalArgumentException(Constants.EXCPT_TITLE_KEY_EMPTY);
 
 		String result = null;
 		
@@ -36,10 +39,10 @@ public class Title
 	public Title(ResourceManager manager, String key)
 	{
 		if (manager == null)
-			throw new IllegalArgumentException("The resource manager is null.");
+			throw new IllegalArgumentException(Constants.EXCPT_RESOURCE_MANAGER_EMPTY);
 
 		if (key == null)
-			throw new IllegalArgumentException("The key is null.");
+			throw new IllegalArgumentException(Constants.EXCPT_TITLE_KEY_EMPTY);
 
 		this.manager = manager;
 		this.key = key;

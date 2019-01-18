@@ -2,6 +2,9 @@ package org.dav.service.view;
 
 import java.awt.*;
 
+/**
+ * This class makes dealing with GridBagConstraints easier.
+ */
 public class UsableGBC extends GridBagConstraints
 {
 	public UsableGBC()
