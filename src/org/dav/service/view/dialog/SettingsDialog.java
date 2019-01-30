@@ -1,11 +1,16 @@
 package org.dav.service.view.dialog;
 
 import org.dav.service.settings.TransmissiveSettings;
+import org.dav.service.settings.parameter.Parameter;
 import org.dav.service.util.ResourceManager;
 import org.dav.service.view.Constants;
+import org.dav.service.view.ParentWindow;
 import org.dav.service.view.Title;
 import org.dav.service.view.TitleAdjuster;
+import org.dav.service.view.table.SettingsTable;
 import org.dav.service.view.table.SettingsTableModel;
+import org.dav.service.view.table.editor.TableCellEditorFactory;
+import org.dav.service.view.table.renderer.TableCellRendererFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +21,7 @@ public class SettingsDialog extends JDialog
 {
 	private static final Dimension BUTTON_MAX_SIZE = new Dimension(100, 30);
 
-	private Frame parent;
+	private ParentWindow parent;
 
 	private ResourceManager resourceManager;
 	private TitleAdjuster titleAdjuster;
@@ -29,7 +34,7 @@ public class SettingsDialog extends JDialog
 	private JButton okButton;
 	private JButton cancelButton;
 
-	public SettingsDialog(Frame parent, ResourceManager resourceManager, TransmissiveSettings... settingsArray) throws Exception
+	public SettingsDialog(ParentWindow parent, ResourceManager resourceManager, TransmissiveSettings... settingsArray) throws Exception
 	{
 		super(parent, "", true);
 

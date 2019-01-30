@@ -2,6 +2,7 @@ package org.dav.service.view.table.editor;
 
 import org.dav.service.settings.type.Password;
 import org.dav.service.view.Constants;
+import org.dav.service.view.ViewUtils;
 
 import javax.swing.*;
 import javax.swing.table.TableCellEditor;

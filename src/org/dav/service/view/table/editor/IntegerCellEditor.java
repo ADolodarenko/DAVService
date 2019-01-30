@@ -1,6 +1,7 @@
 package org.dav.service.view.table.editor;
 
 import org.dav.service.view.Constants;
+import org.dav.service.view.ViewUtils;
 
 import javax.swing.*;
 import javax.swing.table.TableCellEditor;
@@ -13,9 +14,10 @@ public class IntegerCellEditor extends AbstractCellEditor implements TableCellEd
 	private boolean confirmationRequired;
 	private Object oldValue;
 
-	public IntegerCellEditor(boolean confirmationRequired)
+	public IntegerCellEditor(boolean confirmationRequired,
+							 int initialValue, int minimum, int maximum, int stepSize)
 	{
-		SpinnerNumberModel model = new SpinnerNumberModel(0, Integer.MIN_VALUE, Integer.MAX_VALUE, 1);
+		SpinnerNumberModel model = new SpinnerNumberModel(initialValue, minimum, maximum, stepSize);
 
 		editor = new JSpinner(model);
 

@@ -2,6 +2,7 @@ package org.dav.service.view.table.editor;
 
 import org.dav.service.data.DataUtils;
 import org.dav.service.view.Constants;
+import org.dav.service.view.ViewUtils;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -26,7 +27,9 @@ public class FileCellEditor extends AbstractCellEditor implements TableCellEdito
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
-				JFileChooser fileChooser = ViewUtils.getFileChooser();
+				File file = new File(editor.getText());
+
+				JFileChooser fileChooser = ViewUtils.getFileChooser(file.getParentFile());
 
 				fileChooser.resetChoosableFileFilters();
 

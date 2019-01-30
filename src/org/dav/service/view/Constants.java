@@ -160,5 +160,11 @@ public class Constants
 	public static final String KEY_UI_FILE_CHOOSER_BUTTON_CANCEL = "FileChooser.cancelButtonText";
 	public static final String KEY_UI_FILE_CHOOSER_TOOLTIP_CANCEL = "FileChooser.cancelButtonToolTipText";
 
+	//Icons names
+	public static final String ICON_NAME_OK = "ok_16.png";
+	public static final String ICON_NAME_CANCEL = "cancel_16.png";
+	public static final String ICON_NAME_USA = "american_16.png";
+	public static final String ICON_NAME_RUS = "russian_16.png";
+
 	private Constants(){}
 }
