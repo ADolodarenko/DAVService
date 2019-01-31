@@ -4,7 +4,6 @@ import org.dav.service.settings.TransmissiveSettings;
 import org.dav.service.settings.parameter.Parameter;
 import org.dav.service.util.ResourceManager;
 import org.dav.service.view.Constants;
-import org.dav.service.view.ParentWindow;
 import org.dav.service.view.Title;
 import org.dav.service.view.TitleAdjuster;
 import org.dav.service.view.table.SettingsTable;
@@ -21,7 +20,8 @@ public class SettingsDialog extends JDialog
 {
 	private static final Dimension BUTTON_MAX_SIZE = new Dimension(100, 30);
 
-	private ParentWindow parent;
+	private Frame owner;
+	private SettingsDialogInvoker invoker;
 
 	private ResourceManager resourceManager;
 	private TitleAdjuster titleAdjuster;
@@ -34,11 +34,13 @@ public class SettingsDialog extends JDialog
 	private JButton okButton;
 	private JButton cancelButton;
 
-	public SettingsDialog(ParentWindow parent, ResourceManager resourceManager, TransmissiveSettings... settingsArray) throws Exception
+	public SettingsDialog(Frame owner, SettingsDialogInvoker invoker,
+						  ResourceManager resourceManager, TransmissiveSettings... settingsArray) throws Exception
 	{
-		super(parent, "", true);
+		super(owner, "", true);
 
-		this.parent = parent;
+		this.owner = owner;
+		this.invoker = invoker;
 
 		this.resourceManager = resourceManager;
 		this.titleAdjuster = new TitleAdjuster();
@@ -123,7 +125,8 @@ public class SettingsDialog extends JDialog
 				}
 				catch (Exception e)
 				{
-					parent.log(e);
+					if (invoker != null)
+						invoker.log(e);
 				}
 
 				allSettingsList.addAll(settings.getParameterList());
@@ -136,7 +139,7 @@ public class SettingsDialog extends JDialog
 			tableModel.fireTableStructureChanged();
 
 			pack();
-			setLocationRelativeTo(parent);
+			setLocationRelativeTo(owner);
 		}
 
 		super.setVisible(b);
@@ -154,11 +157,13 @@ public class SettingsDialog extends JDialog
 			}
 			catch (Exception e)
 			{
-				parent.log(e);
+				if (invoker != null)
+					invoker.log(e);
 			}
 		}
 
-		parent.reloadSettings();
+		if (invoker != null)
+			invoker.reloadSettings();
 
 		exit();
 	}
@@ -168,7 +173,9 @@ public class SettingsDialog extends JDialog
 		stopTableEditing();
 
 		setVisible(false);
-		parent.setFocus();
+
+		if (invoker != null)
+			invoker.setFocus();
 	}
 
 	private void stopTableEditing()

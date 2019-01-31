@@ -12,7 +12,7 @@ import java.util.*;
 
 public abstract class TransmissiveSettings implements Settings
 {
-	private ResourceManager resourceManager;
+	protected ResourceManager resourceManager;
 	protected Map<String, Parameter> paramMap;
 	protected ParameterHeader[] headers;
 
@@ -40,7 +40,7 @@ public abstract class TransmissiveSettings implements Settings
 	private void setParameters(boolean load) throws Exception
 	{
 		if (load)
-			SettingsManager.loadSettings();
+			SettingsManager.loadSettings(resourceManager.getConfig());
 
 		for (int i = 0; i < headers.length; i++)
 			setParameter(load, headers[i]);
@@ -111,14 +111,7 @@ public abstract class TransmissiveSettings implements Settings
 			String fileName = SettingsManager.getStringValue(keyString);
 
 			if (fileName == null)
-				switch (keyString)
-				{
-					case Constants.KEY_PARAM_SP_LOG_PATTERN:
-						fileName = Constants.MESS_SP_LOG_FILE_DEFAULT_PATTERN;
-						break;
-					default:
-						fileName = Constants.MESS_CURRENT_PATH;
-				}
+				fileName = Constants.MESS_CURRENT_PATH;
 
 			value = new File(fileName);
 		}
@@ -143,7 +136,6 @@ public abstract class TransmissiveSettings implements Settings
 		for (Locale locale : resourceManager.getAvailableLocales())
 			if (locale.toString().equals(localeName))
 				return locale;
-
 
 		return null;
 	}

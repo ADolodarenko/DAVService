@@ -77,6 +77,8 @@ public class Constants
 	public static final String MESS_AHREF_BEGINNING = "<a href=\"";
 	public static final String MESS_FILE_REF_BEGINNING = "file:/";
 	public static final String MESS_FILE_DEFAULT_PATTERN = "./file.txt";
+	public static final String MESS_CURRENT_PATH = ".";
+	public static final String MESS_LOG_FILE_DEFAULT_PATTERN = "./log.txt";
 	public static final String MESS_SETTINGS_DESCRIPTION = "Program settings";
 
 	//Titles for main frame
