@@ -3,11 +3,11 @@ package org.dav.service.settings;
 import org.dav.service.settings.parameter.ParameterHeader;
 import org.dav.service.settings.type.Password;
 import org.dav.service.util.ResourceManager;
-import org.dav.service.view.Constants;
+import org.dav.service.util.Constants;
 
 public class DatabaseSettings extends TransmissiveSettings
 {
-	private static final int PARAM_COUNT = 11;
+	private static final int PARAM_COUNT = 7;
 
 	public DatabaseSettings(ResourceManager resourceManager) throws Exception
 	{
@@ -22,10 +22,6 @@ public class DatabaseSettings extends TransmissiveSettings
 		headers[4] = new ParameterHeader(Constants.KEY_PARAM_DB_CATALOG, String.class, "");
 		headers[5] = new ParameterHeader(Constants.KEY_PARAM_DB_USER, String.class, "");
 		headers[6] = new ParameterHeader(Constants.KEY_PARAM_DB_PASSWORD, Password.class, new Password(""));
-		headers[7] = new ParameterHeader(Constants.KEY_PARAM_DB_TABLE, String.class, "");
-		headers[8] = new ParameterHeader(Constants.KEY_PARAM_DB_SP, String.class, "");
-		headers[9] = new ParameterHeader(Constants.KEY_PARAM_CHANNEL, Integer.class, Integer.valueOf(0));
-		headers[10] = new ParameterHeader(Constants.KEY_PARAM_PRICE_LIST, Integer.class, Integer.valueOf(0));
 
 		init();
 	}
@@ -40,10 +36,6 @@ public class DatabaseSettings extends TransmissiveSettings
 		SettingsManager.setStringValue(headers[4].getKeyString(), getCatalog());
 		SettingsManager.setStringValue(headers[5].getKeyString(), getUserName());
 		SettingsManager.setStringValue(headers[6].getKeyString(), getPassword().getSecret());
-		SettingsManager.setStringValue(headers[7].getKeyString(), getTableName());
-		SettingsManager.setStringValue(headers[8].getKeyString(), getStoredProcedureName());
-		SettingsManager.setIntValue(headers[9].getKeyString(), getChannelId());
-		SettingsManager.setIntValue(headers[10].getKeyString(), getPriceId());
 
 		SettingsManager.saveSettings(resourceManager.getConfig());
 	}
@@ -81,25 +73,5 @@ public class DatabaseSettings extends TransmissiveSettings
 	public Password getPassword()
 	{
 		return ((Password) paramMap.get(headers[6].getKeyString()).getValue());
-	}
-
-	public String getTableName()
-	{
-		return ((String) paramMap.get(headers[7].getKeyString()).getValue());
-	}
-
-	public String getStoredProcedureName()
-	{
-		return ((String) paramMap.get(headers[8].getKeyString()).getValue());
-	}
-
-	public int getChannelId()
-	{
-		return ((Integer) paramMap.get(headers[9].getKeyString()).getValue());
-	}
-
-	public int getPriceId()
-	{
-		return ((Integer) paramMap.get(headers[10].getKeyString()).getValue());
 	}
 }

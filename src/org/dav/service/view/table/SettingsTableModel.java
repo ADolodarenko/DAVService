@@ -2,7 +2,7 @@ package org.dav.service.view.table;
 
 import org.dav.service.settings.parameter.Parameter;
 import org.dav.service.util.ResourceManager;
-import org.dav.service.view.Constants;
+import org.dav.service.util.Constants;
 import org.dav.service.view.Title;
 
 import javax.swing.table.AbstractTableModel;

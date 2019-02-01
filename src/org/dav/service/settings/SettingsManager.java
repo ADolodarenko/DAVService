@@ -1,6 +1,6 @@
 package org.dav.service.settings;
 
-import org.dav.service.view.Constants;
+import org.dav.service.util.Constants;
 
 import java.io.*;
 import java.util.Properties;

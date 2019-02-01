@@ -1,7 +1,7 @@
 package org.dav.service.view.table.editor;
 
 import org.dav.service.util.ResourceManager;
-import org.dav.service.view.Constants;
+import org.dav.service.util.Constants;
 
 import javax.swing.table.TableCellEditor;
 import java.util.HashMap;

@@ -1,5 +1,7 @@
 package org.dav.service.view;
 
+import org.dav.service.util.Constants;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;

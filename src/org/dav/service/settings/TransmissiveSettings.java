@@ -4,7 +4,7 @@ import org.dav.service.settings.parameter.Parameter;
 import org.dav.service.settings.parameter.ParameterHeader;
 import org.dav.service.settings.type.Password;
 import org.dav.service.util.ResourceManager;
-import org.dav.service.view.Constants;
+import org.dav.service.util.Constants;
 import org.dav.service.view.Title;
 
 import java.io.File;

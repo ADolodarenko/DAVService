@@ -1,3 +1,5 @@
 Manifest-Version: 1.0
 Class-Path: commons-io-2.6.jar javax.mail.jar
-
+Implementation-Title: DAV service libs
+Implementation-Version: 1.1.0
+Implementation-Vendor: Dolodarenko A.V.

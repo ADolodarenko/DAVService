@@ -3,7 +3,7 @@ package org.dav.service.view.dialog;
 import org.dav.service.settings.TransmissiveSettings;
 import org.dav.service.settings.parameter.Parameter;
 import org.dav.service.util.ResourceManager;
-import org.dav.service.view.Constants;
+import org.dav.service.util.Constants;
 import org.dav.service.view.Title;
 import org.dav.service.view.TitleAdjuster;
 import org.dav.service.view.table.SettingsTable;
@@ -52,6 +52,86 @@ public class SettingsDialog extends JDialog
 		initComponents();
 
 		setResizable(false);
+	}
+
+	@Override
+	public void setVisible(boolean b)
+	{
+		if (b)
+		{
+			List<Parameter> allSettingsList = new LinkedList<>();
+			tableModel.clear();
+
+			for (TransmissiveSettings settings : settingsList)
+				allSettingsList.addAll(settings.getParameterList());
+
+			if (!allSettingsList.isEmpty())
+				tableModel.addAllRows(allSettingsList);
+
+			titleAdjuster.resetComponents();
+			tableModel.fireTableStructureChanged();
+
+			pack();
+			setLocationRelativeTo(owner);
+		}
+
+		super.setVisible(b);
+	}
+
+	/**
+	 * Forces the settings to load themselves from their sources.
+	 */
+	public void reloadSettings()
+	{
+		for (TransmissiveSettings settings : settingsList)
+			try
+			{
+				settings.load();
+			}
+			catch (Exception e)
+			{
+				if (invoker != null)
+					invoker.log(e);
+			}
+	}
+
+	/**
+	 * Saves all changes and closes the settings dialog.
+	 */
+	public void saveAndExit()
+	{
+		stopTableEditing();
+
+		for (TransmissiveSettings settings : settingsList)
+		{
+			try
+			{
+				settings.save();
+			}
+			catch (Exception e)
+			{
+				if (invoker != null)
+					invoker.log(e);
+			}
+		}
+
+		if (invoker != null)
+			invoker.reloadSettings();
+
+		exit();
+	}
+
+	/**
+	 * Closes the settings dialog without saving any changes.
+	 */
+	public void exit()
+	{
+		stopTableEditing();
+
+		setVisible(false);
+
+		if (invoker != null)
+			invoker.setFocus();
 	}
 
 	private void initComponents()
@@ -107,75 +187,6 @@ public class SettingsDialog extends JDialog
 		cancelButton.setMaximumSize(BUTTON_MAX_SIZE);
 		cancelButton.setIcon(resourceManager.getImageIcon(Constants.ICON_NAME_CANCEL));
 		cancelButton.addActionListener(event -> exit());
-	}
-
-	@Override
-	public void setVisible(boolean b)
-	{
-		if (b)
-		{
-			List<Parameter> allSettingsList = new LinkedList<>();
-			tableModel.clear();
-
-			for (TransmissiveSettings settings : settingsList)
-			{
-				try
-				{
-					settings.load();
-				}
-				catch (Exception e)
-				{
-					if (invoker != null)
-						invoker.log(e);
-				}
-
-				allSettingsList.addAll(settings.getParameterList());
-			}
-
-			if (!allSettingsList.isEmpty())
-				tableModel.addAllRows(allSettingsList);
-
-			titleAdjuster.resetComponents();
-			tableModel.fireTableStructureChanged();
-
-			pack();
-			setLocationRelativeTo(owner);
-		}
-
-		super.setVisible(b);
-	}
-
-	public void saveAndExit()
-	{
-		stopTableEditing();
-
-		for (TransmissiveSettings settings : settingsList)
-		{
-			try
-			{
-				settings.save();
-			}
-			catch (Exception e)
-			{
-				if (invoker != null)
-					invoker.log(e);
-			}
-		}
-
-		if (invoker != null)
-			invoker.reloadSettings();
-
-		exit();
-	}
-
-	public void exit()
-	{
-		stopTableEditing();
-
-		setVisible(false);
-
-		if (invoker != null)
-			invoker.setFocus();
 	}
 
 	private void stopTableEditing()

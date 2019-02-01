@@ -2,7 +2,7 @@ package org.dav.service.view.table.renderer;
 
 import org.dav.service.data.DataUtils;
 import org.dav.service.settings.type.Password;
-import org.dav.service.view.Constants;
+import org.dav.service.util.Constants;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;

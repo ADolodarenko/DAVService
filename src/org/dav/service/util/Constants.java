@@ -1,4 +1,4 @@
-package org.dav.service.view;
+package org.dav.service.util;
 
 /**
  * A list of strings for exceptions, keys and messages.

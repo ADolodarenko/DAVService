@@ -1,7 +1,7 @@
 package org.dav.service.view.table;
 
 import org.dav.service.settings.parameter.Parameter;
-import org.dav.service.view.Constants;
+import org.dav.service.util.Constants;
 import org.dav.service.view.table.editor.TableCellEditorFactory;
 import org.dav.service.view.table.renderer.TableCellRendererFactory;
 import org.dav.service.view.table.renderer.TableHeaderRenderer;

@@ -1,7 +1,7 @@
 package org.dav.service.view.table.editor;
 
 import org.dav.service.util.ResourceManager;
-import org.dav.service.view.Constants;
+import org.dav.service.util.Constants;
 import org.dav.service.view.ViewUtils;
 import org.dav.service.view.table.renderer.LocaleValueComboRenderer;
 

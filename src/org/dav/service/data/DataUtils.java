@@ -1,7 +1,7 @@
 package org.dav.service.data;
 
 import org.apache.commons.io.FilenameUtils;
-import org.dav.service.view.Constants;
+import org.dav.service.util.Constants;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
