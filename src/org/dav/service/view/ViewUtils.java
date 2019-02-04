@@ -9,12 +9,34 @@ import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * A utility class that operates on dialogs and some service data,
+ * taking into account language settings of the ResourceManager instance given.
+ * You must call the resetResourceManager static method with you current ResourceManager instance given
+ * before invoking any other methods of this class.
+ */
 public class ViewUtils
 {
 	private static ResourceManager resourceManager;
 	private static List<UITextParameter> uiTextParameters;
 	private static Component dialogOwner;
 	private static JFileChooser fileChooser;
+
+	private ViewUtils(){}
+
+	/**
+	 * Sets the current resource manager. The first method to call on this class.
+	 * @param manager your ResourceManager instance
+	 */
+	public static void resetResourceManager(ResourceManager manager)
+	{
+		if (resourceManager != manager)
+		{
+			resourceManager = manager;
+
+			rebuildTextParameters();
+		}
+	}
 
 	private static void rebuildTextParameters()
 	{
@@ -62,16 +84,6 @@ public class ViewUtils
 				new Title(resourceManager, Constants.KEY_TOOLTIP_SAVE_FILE)));
 		uiTextParameters.add(new UITextParameter(Constants.KEY_UI_FILE_CHOOSER_TOOLTIP_CANCEL,
 				new Title(resourceManager, Constants.KEY_TOOLTIP_CANCEL)));
-	}
-
-	public static void resetResourceManager(ResourceManager manager)
-	{
-		if (resourceManager != manager)
-		{
-			resourceManager = manager;
-
-			rebuildTextParameters();
-		}
 	}
 
 	public static void setDialogOwner(Component owner)
