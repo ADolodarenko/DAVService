@@ -112,6 +112,7 @@ public class Constants
 	public static final String KEY_PARAM_PACK_SIZE = "PacketSize";
 	public static final String KEY_PARAM_SP_LOG_PATTERN = "StoredProcedureLogPattern";
 	public static final String KEY_PARAM_FIELD_DELIMITER = "FieldDelimiter";
+	public static final String KEY_PARAM_CHARSET = "Charset";
 
 	//For SettingsDialog
 	public static final String KEY_SETTINGS_DIALOG = "SettingsDialog";
