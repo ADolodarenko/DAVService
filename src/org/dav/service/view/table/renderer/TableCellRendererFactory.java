@@ -52,6 +52,9 @@ public class TableCellRendererFactory
 				break;
 			case Constants.CLASS_NAME_PASSWORD:
 				renderer = new PasswordCellRenderer();
+				break;
+			case Constants.CLASS_NAME_CHARSET:
+				renderer = new CharsetCellRenderer();
 		}
 
 		if (renderer != null)

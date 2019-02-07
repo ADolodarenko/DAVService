@@ -61,6 +61,9 @@ public class TableCellEditorFactory
 				break;
 			case Constants.CLASS_NAME_PASSWORD:
 				editor = new PasswordCellEditor(confirmationRequired);
+				break;
+			case Constants.CLASS_NAME_CHARSET:
+				editor = new CharsetCellEditor(confirmationRequired);
 		}
 
 		if (editor != null)

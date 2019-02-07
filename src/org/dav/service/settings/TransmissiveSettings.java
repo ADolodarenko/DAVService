@@ -8,6 +8,7 @@ import org.dav.service.util.Constants;
 import org.dav.service.view.Title;
 
 import java.io.File;
+import java.nio.charset.Charset;
 import java.util.*;
 
 public abstract class TransmissiveSettings implements Settings
@@ -120,6 +121,16 @@ public abstract class TransmissiveSettings implements Settings
 			String secret = SettingsManager.getStringValue(keyString);
 
 			value = new Password(secret);
+		}
+		else if (Constants.CLASS_NAME_CHARSET.equals(className))
+		{
+			String charsetName = SettingsManager.getStringValue(keyString);
+
+			if (charsetName != null && !charsetName.isEmpty())
+				value = Charset.forName(charsetName);
+
+			if (value == null)
+				value = Charset.defaultCharset();
 		}
 
 		if (value == null)

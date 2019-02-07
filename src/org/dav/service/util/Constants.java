@@ -53,6 +53,7 @@ public class Constants
 	public static final String CLASS_NAME_DOUBLE = "Double";
 	public static final String CLASS_NAME_DATE = "Date";
 	public static final String CLASS_NAME_LOCALE = "Locale";
+	public static final String CLASS_NAME_CHARSET = "Charset";
 	public static final String CLASS_NAME_FILE = "File";
 	public static final String CLASS_NAME_STRING = "String";
 	public static final String CLASS_NAME_FILESETTINGS = "FileSettings";

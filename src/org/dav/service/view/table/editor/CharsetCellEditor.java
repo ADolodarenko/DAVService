@@ -1,6 +1,5 @@
 package org.dav.service.view.table.editor;
 
-import org.dav.service.util.ResourceManager;
 import org.dav.service.view.ViewUtils;
 
 import javax.swing.*;
@@ -15,7 +14,7 @@ public class CharsetCellEditor extends AbstractCellEditor implements TableCellEd
 	private boolean confirmationRequired;
 	private Object oldValue;
 
-	public CharsetCellEditor(ResourceManager resourceManager, boolean confirmationRequired)
+	public CharsetCellEditor(boolean confirmationRequired)
 	{
 		DefaultComboBoxModel<Charset> model = new DefaultComboBoxModel<>();
 
