@@ -16,7 +16,7 @@ public class CharsetCellRenderer extends DefaultTableCellRenderer
 		{
 			Charset charset = (Charset) value;
 
-			label.setText(charset.displayName()); //TODO: Do I have to use an overloaded method displayName(Locale locale) here or something else?
+			label.setText(charset.displayName());
 		}
 
 		return label;

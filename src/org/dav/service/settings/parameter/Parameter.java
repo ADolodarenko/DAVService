@@ -2,6 +2,7 @@ package org.dav.service.settings.parameter;
 
 import org.dav.service.settings.type.Password;
 import org.dav.service.util.Constants;
+import org.dav.service.util.Core;
 import org.dav.service.view.Title;
 
 import java.io.File;
@@ -48,8 +49,11 @@ public class Parameter
 		if (value == null)
 			throw new IllegalArgumentException(Constants.EXCPT_PARAM_VALUE_EMPTY);
 
-		String thisClassName = getType().getSimpleName();
-		String thatClassName = value.getClass().getSimpleName();
+		Class<?> thisClass = getType();
+		Class<?> thatClass = value.getClass();
+
+		String thisClassName = thisClass.getSimpleName();
+		String thatClassName = thatClass.getSimpleName();
 
 		if (thisClassName.equals(thatClassName))
 			this.value = value;
@@ -78,6 +82,10 @@ public class Parameter
 				default:
 					throw new IllegalArgumentException(String.format(Constants.EXCPT_PARAM_VALUE_WRONG, stringValue));
 			}
+		}
+		else if (Core.amongSuperClasses(thisClass, thatClass))
+		{
+			this.value = value;
 		}
 		else
 			throw new IllegalArgumentException(String.format(Constants.EXCPT_PARAM_VALUE_WRONG, value.toString()));

@@ -1,6 +1,7 @@
 package org.dav.service.view.table.editor;
 
 import org.dav.service.view.ViewUtils;
+import org.dav.service.view.table.renderer.CharsetComboRenderer;
 
 import javax.swing.*;
 import javax.swing.table.TableCellEditor;
@@ -23,7 +24,7 @@ public class CharsetCellEditor extends AbstractCellEditor implements TableCellEd
 
 		editor = new JComboBox<>(model);
 		editor.setEditable(false);
-		//TODO: Do I have to set an alternative renderer for editor here?
+		editor.setRenderer(new CharsetComboRenderer());
 
 		this.confirmationRequired = confirmationRequired;
 	}
