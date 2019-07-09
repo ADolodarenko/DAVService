@@ -9,13 +9,15 @@ public class CharsetComboRenderer extends JLabel implements ListCellRenderer
 	@Override
 	public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus)
 	{
+		JLabel label = (JLabel) new DefaultListCellRenderer().getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+
 		if (value != null && (value instanceof Charset))
 		{
 			Charset charset = (Charset) value;
 
-			setText(charset.displayName());
+			label.setText(charset.displayName());
 		}
 
-		return this;
+		return label;
 	}
 }

@@ -19,6 +19,8 @@ public class LocaleValueComboRenderer extends JLabel implements ListCellRenderer
 	@Override
 	public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus)
 	{
+		JLabel label = (JLabel) new DefaultListCellRenderer().getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+
 		if (value != null)
 		{
 			String valueClassName = value.getClass().getSimpleName();
@@ -27,17 +29,17 @@ public class LocaleValueComboRenderer extends JLabel implements ListCellRenderer
 			{
 				Locale locale = (Locale) value;
 
-				setText(locale.getDisplayName(resourceManager.getCurrentLocale()));
+				label.setText(locale.getDisplayName(resourceManager.getCurrentLocale()));
 
 				String country = locale.getCountry();
 
 				if (country.equalsIgnoreCase("RU"))
-					setIcon(resourceManager.getImageIcon(Constants.ICON_NAME_RUS));
+					label.setIcon(resourceManager.getImageIcon(Constants.ICON_NAME_RUS));
 				else if (country.equalsIgnoreCase("US"))
-					setIcon(resourceManager.getImageIcon(Constants.ICON_NAME_USA));
+					label.setIcon(resourceManager.getImageIcon(Constants.ICON_NAME_USA));
 			}
 		}
 
-		return this;
+		return label;
 	}
 }

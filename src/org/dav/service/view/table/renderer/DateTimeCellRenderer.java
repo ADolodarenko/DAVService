@@ -14,6 +14,8 @@ public class DateTimeCellRenderer extends DefaultTableCellRenderer
 	@Override
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
 	{
+		JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
 		if (value != null)
 		{
 			String valueClassName = value.getClass().getSimpleName();
@@ -23,10 +25,10 @@ public class DateTimeCellRenderer extends DefaultTableCellRenderer
 				LocalDateTime time = (LocalDateTime) value;
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
 				
-				setText(time.format(formatter));
+				label.setText(time.format(formatter));
 			}
 		}
 		
-		return this;
+		return label;
 	}
 }
