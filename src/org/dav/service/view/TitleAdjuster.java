@@ -1,7 +1,5 @@
 package org.dav.service.view;
 
-import org.dav.service.util.Constants;
-
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
@@ -26,26 +24,26 @@ public class TitleAdjuster
 		if (component == null || title == null)
 			return;
 		
-		String className = component.getClass().getSimpleName();
+		Class<?> componentClass = component.getClass();
 		String text = title.getText();
 		
-		if (Constants.CLASS_NAME_JLABEL.equals(className))
+		if (JLabel.class.isAssignableFrom(componentClass))
 			((JLabel) component).setText(text);
-		else if (Constants.CLASS_NAME_JBUTTON.equals(className))
+		else if (JButton.class.isAssignableFrom(componentClass))
 			((JButton) component).setText(text);
-		else if (Constants.CLASS_NAME_JCHECKBOX.equals(className))
+		else if (JCheckBox.class.isAssignableFrom(componentClass))
 			((JCheckBox) component).setText(text);
-		else if (Constants.CLASS_NAME_JMENUITEM.equals(className))
+		else if (JMenuItem.class.isAssignableFrom(componentClass))
 			((JMenuItem) component).setText(text);
-		else if (Constants.CLASS_NAME_JPANEL.equals(className))
+		else if (JPanel.class.isAssignableFrom(componentClass))
 		{
 			Border border = ((JPanel) component).getBorder();
 			
 			if (border != null)
 			{
-				String borderClassName = border.getClass().getSimpleName();
+				Class<?> borderClass = border.getClass();
 				
-				if (Constants.CLASS_NAME_TITLEDBORDER.equals(borderClassName))
+				if (TitledBorder.class.isAssignableFrom(borderClass))
 				{
 					((TitledBorder) border).setTitle(text);
 					
@@ -53,9 +51,9 @@ public class TitleAdjuster
 				}
 			}
 		}
-		else if (component instanceof JFrame)
+		else if (JFrame.class.isAssignableFrom(componentClass))
 			((JFrame) component).setTitle(text);
-		else if (component instanceof JDialog)
+		else if (JDialog.class.isAssignableFrom(componentClass))
 			((JDialog) component).setTitle(text);
 	}
 	

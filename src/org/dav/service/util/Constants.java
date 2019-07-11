@@ -163,6 +163,8 @@ public class Constants
 	public static final String KEY_UI_FILE_CHOOSER_TOOLTIP_SAVE = "FileChooser.saveButtonToolTipText";
 	public static final String KEY_UI_FILE_CHOOSER_BUTTON_CANCEL = "FileChooser.cancelButtonText";
 	public static final String KEY_UI_FILE_CHOOSER_TOOLTIP_CANCEL = "FileChooser.cancelButtonToolTipText";
+	public static final String KEY_UI_TEXTFIELD_BORDER = "TextField.border";
+	public static final String KEY_UI_TEXT_INACTIVETEXT = "textInactiveText";
 
 	//Icons names
 	public static final String ICON_NAME_OK = "ok_16.png";
