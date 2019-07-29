@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class TableCellEditorFactory
 {
-	private ResourceManager resourceManager;
+	protected ResourceManager resourceManager;
 	private Map<String, TableCellEditor> editors;
 
 	public TableCellEditorFactory(ResourceManager resourceManager)

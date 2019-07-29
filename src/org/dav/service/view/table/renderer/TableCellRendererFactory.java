@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class TableCellRendererFactory
 {
-	private ResourceManager resourceManager;
+	protected ResourceManager resourceManager;
 	private Map<String, TableCellRenderer> renderers;
 
 	public TableCellRendererFactory(ResourceManager resourceManager)
