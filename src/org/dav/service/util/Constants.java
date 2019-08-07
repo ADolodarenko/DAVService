@@ -18,6 +18,9 @@ public class Constants
 	public static final String EXCPT_PARAM_VALUE_EMPTY = "Parameter value is empty.";
 	public static final String EXCPT_PARAM_VALUE_WRONG = "Parameter value %s is wrong.";
 	public static final String EXCPT_PARAM_TYPE_EMPTY = "Parameter type is empty.";
+	public static final String EXCPT_SETTINGS_EMPTY = "Settings are empty.";
+	public static final String EXCPT_SETTINGS_WRONG = "Wrong settings.";
+	public static final String EXCPT_PARAM_EMPTY = "Parameter is empty.";
 
 	//Exceptions for the FileSource hierarchy
 	public static final String EXCPT_FILE_SETTINGS_EMPTY = "File settings are empty.";

@@ -33,6 +33,20 @@ public abstract class TransmissiveSettings implements Settings
 	}
 
 	@Override
+	public void init(Settings settings) throws Exception
+	{
+		if (settings == null)
+			throw new IllegalArgumentException(Constants.EXCPT_SETTINGS_EMPTY);
+
+		if ( !getClass().equals(settings.getClass()) )
+			throw new IllegalArgumentException(Constants.EXCPT_SETTINGS_WRONG);
+
+		TransmissiveSettings thatSettings = (TransmissiveSettings) settings;
+
+		setParameters(thatSettings);
+	}
+
+	@Override
 	public void load() throws Exception
 	{
 		setParameters(true);
@@ -47,12 +61,23 @@ public abstract class TransmissiveSettings implements Settings
 			setParameter(load, headers[i]);
 	}
 
+	private void setParameters(TransmissiveSettings settings) throws Exception
+	{
+		for (int i = 0; i < headers.length; i++)
+			setParameter(headers[i], settings);
+	}
+
 	protected void setParameter(boolean load, ParameterHeader header) throws Exception
 	{
 		if (load)
 			paramMap.put(header.getKeyString(), getParameter(header));
 		else
 			paramMap.put(header.getKeyString(), initParameter(header));
+	}
+
+	protected void setParameter(ParameterHeader header, TransmissiveSettings settings) throws Exception
+	{
+		paramMap.put(header.getKeyString(), getParameterCopy(header, settings));
 	}
 
 	private Parameter initParameter(ParameterHeader header) throws Exception
@@ -63,6 +88,55 @@ public abstract class TransmissiveSettings implements Settings
 		Class<?> cl = header.getType();
 
 		Object value = header.getInitialValue();
+
+		return new Parameter(key, value, cl);
+	}
+
+	private Parameter getParameterCopy(ParameterHeader header, TransmissiveSettings settings) throws Exception
+	{
+		String keyString = header.getKeyString();
+		Class<?> cl = header.getType();
+
+		Title key = new Title(resourceManager, keyString);
+
+		Parameter parameter = settings.paramMap.get(keyString);
+
+		if (parameter == null)
+			throw new IllegalArgumentException(Constants.EXCPT_PARAM_EMPTY);
+
+		if ( !cl.equals(parameter.getType()) )
+			throw new IllegalArgumentException(Constants.EXCPT_VALUE_TYPE_WRONG);
+
+		Object rawValue = parameter.getValue();
+
+		if (rawValue == null)
+			throw new IllegalArgumentException(Constants.EXCPT_PARAM_VALUE_EMPTY);
+
+		if ( !cl.isAssignableFrom(rawValue.getClass()) )
+			throw new IllegalArgumentException(Constants.EXCPT_VALUE_TYPE_WRONG);
+
+		Object value = null;
+		String className = cl.getSimpleName();
+
+		if (Constants.CLASS_NAME_BOOLEAN.equals(className))
+			value = new Boolean(((Boolean) rawValue).booleanValue());
+		else if (Constants.CLASS_NAME_INTEGER.equals(className))
+			value = new Integer(((Integer) rawValue).intValue());
+		else if (Constants.CLASS_NAME_DOUBLE.equals(className))
+			value = new Double(((Double) rawValue).doubleValue());
+		else if (Constants.CLASS_NAME_STRING.equals(className))
+			value = rawValue;
+		else if (Constants.CLASS_NAME_LOCALE.equals(className))
+			value = ((Locale) rawValue).clone();
+		else if (Constants.CLASS_NAME_FILE.equals(className))
+			value = new File(((File) rawValue).getAbsolutePath());
+		else if (Constants.CLASS_NAME_PASSWORD.equals(className))
+			value = new Password(((Password) rawValue).getKey());
+		else if (Constants.CLASS_NAME_CHARSET.equals(className))
+			value = Charset.forName(((Charset) rawValue).name());
+
+		if (value == null)
+			throw new Exception(Constants.EXCPT_VALUE_TYPE_WRONG);
 
 		return new Parameter(key, value, cl);
 	}

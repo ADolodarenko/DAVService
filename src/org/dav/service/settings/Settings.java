@@ -5,4 +5,5 @@ public interface Settings
 	void init() throws Exception;
 	void load() throws Exception;
 	void save() throws Exception;
+	void init(Settings settings) throws Exception;
 }

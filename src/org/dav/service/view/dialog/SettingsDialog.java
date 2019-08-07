@@ -45,13 +45,21 @@ public class SettingsDialog extends JDialog
 		this.resourceManager = resourceManager;
 		this.titleAdjuster = new TitleAdjuster();
 
-		settingsList = new LinkedList<>();
-		for (int i = 0; i < settingsArray.length; i++)
-			settingsList.add(settingsArray[i]);
+		this.settingsList = new LinkedList<>();
+		resetSettingsList(settingsArray);
 
 		initComponents();
 
 		setResizable(false);
+	}
+
+	public void resetSettingsList(TransmissiveSettings... settingsArray)
+	{
+		settingsList.clear();
+
+		if (settingsArray != null)
+			for (int i = 0; i < settingsArray.length; i++)
+				settingsList.add(settingsArray[i]);
 	}
 
 	@Override
