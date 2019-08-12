@@ -177,6 +177,29 @@ public class ViewUtils
 		return builder.toString();
 	}
 
+	public static void resetAction(AbstractAction action,
+								   ResourceManager resourceManager,
+								   String nameKey,
+								   String shortDescriptionKey,
+								   String actionIconName)
+	{
+		if (action != null)
+		{
+			ResourceManager resManager = ViewUtils.resourceManager;
+			if (resourceManager != null)
+				resManager = resourceManager;
+
+			if (resManager == null)
+				throw new IllegalArgumentException(Constants.EXCPT_RESOURCE_MANAGER_EMPTY);
+
+			if (nameKey != null)
+				action.putValue(Action.NAME, new Title(resManager, nameKey).getText());
+			if (shortDescriptionKey != null)
+				action.putValue(Action.SHORT_DESCRIPTION, new Title(resManager, shortDescriptionKey).getText());
+			action.putValue(Action.SMALL_ICON, resManager.getImageIcon(actionIconName));
+		}
+	}
+
 	private static String getAssemblyInfoByType(Package targetPackage, ExtensionInfoType infoType)
 	{
 		switch (infoType)

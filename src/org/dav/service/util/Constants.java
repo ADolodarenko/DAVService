@@ -12,6 +12,7 @@ public class Constants
 	public static final String EXCPT_TABLE_RENDERER_FACTORY_EMPTY = "Table cell renderer factory is empty.";
 	public static final String EXCPT_VALUE_TYPE_WRONG = "Wrong value type.";
 	public static final String EXCPT_TITLE_KEY_EMPTY = "The title key is empty.";
+	public static final String EXCPT_TABLE_EMPTY = "The table is empty.";
 
 	//Exceptions for Parameter class
 	public static final String EXCPT_PARAM_KEY_EMPTY = "Parameter key is empty.";

@@ -6,13 +6,17 @@ import org.dav.service.util.ResourceManager;
 import org.dav.service.util.Constants;
 import org.dav.service.view.Title;
 import org.dav.service.view.TitleAdjuster;
+import org.dav.service.view.ViewUtils;
 import org.dav.service.view.table.SettingsTable;
 import org.dav.service.view.table.SettingsTableModel;
 import org.dav.service.view.table.editor.TableCellEditorFactory;
+import org.dav.service.view.table.listener.ForEditableCellsSelectionListener;
 import org.dav.service.view.table.renderer.TableCellRendererFactory;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,6 +34,9 @@ public class SettingsDialog extends JDialog
 
 	private SettingsTableModel tableModel;
 	private SettingsTable table;
+
+	private AbstractAction okAction;
+	private AbstractAction cancelAction;
 
 	private JButton okButton;
 	private JButton cancelButton;
@@ -78,6 +85,7 @@ public class SettingsDialog extends JDialog
 
 			titleAdjuster.resetComponents();
 			tableModel.fireTableStructureChanged();
+			resetActions();
 
 			pack();
 			setLocationRelativeTo(owner);
@@ -158,6 +166,8 @@ public class SettingsDialog extends JDialog
 				new TableCellEditorFactory(resourceManager),
 				new TableCellRendererFactory(resourceManager));
 
+		table.getColumnModel().getSelectionModel().addListSelectionListener(new ForEditableCellsSelectionListener(table));
+
 		JScrollPane tablePane = new JScrollPane(table);
 
 		JPanel panel = new JPanel(new BorderLayout());
@@ -172,12 +182,51 @@ public class SettingsDialog extends JDialog
 		JPanel panel = new JPanel();
 		panel.setBorder(BorderFactory.createEtchedBorder());
 
+		initActions();
 		initButtons();
+
+		assignKeyStrokes(panel);
 
 		panel.add(okButton);
 		panel.add(cancelButton);
 
 		return panel;
+	}
+
+	private void initActions()
+	{
+		okAction = new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				saveAndExit();
+			}
+		};
+
+		cancelAction = new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				exit();
+			}
+		};
+
+		resetActions();
+	}
+
+	private void resetActions()
+	{
+		ViewUtils.resetAction(okAction,
+				resourceManager,
+				Constants.KEY_BUTTON_OK,
+				null,
+				Constants.ICON_NAME_OK);
+
+		ViewUtils.resetAction(cancelAction,
+				resourceManager,
+				Constants.KEY_BUTTON_CANCEL,
+				null,
+				Constants.ICON_NAME_CANCEL);
 	}
 
 	private void initButtons()
@@ -195,6 +244,15 @@ public class SettingsDialog extends JDialog
 		cancelButton.setMaximumSize(BUTTON_MAX_SIZE);
 		cancelButton.setIcon(resourceManager.getImageIcon(Constants.ICON_NAME_CANCEL));
 		cancelButton.addActionListener(event -> exit());
+	}
+
+	private void assignKeyStrokes(JComponent component)
+	{
+		InputMap inputMap = component.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), Constants.KEY_BUTTON_CANCEL);
+
+		ActionMap actionMap = component.getActionMap();
+		actionMap.put(Constants.KEY_BUTTON_CANCEL, cancelAction);
 	}
 
 	private void stopTableEditing()
